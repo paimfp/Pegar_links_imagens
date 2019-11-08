@@ -5,13 +5,11 @@ from bs4 import BeautifulSoup
 url = 'https://www.gettyimages.pt/fotos/'
 
 nomes = [nome for nome in os.listdir('.') if (nome.endswith('jpg') or nome.endswith('png') or nome.endswith('JPG') or nome.endswith('PNG'))and (nome.startswith('gett'))]
-nomes
 
 codigos = []
 for nome in nomes:
     codigo_nome = nome[nome.find('-')+1:nome.rfind('-')]
     codigos.append(codigo_nome)
-codigos
 
 cont = 0
 with open('Links_imagens.txt', 'w') as f:
