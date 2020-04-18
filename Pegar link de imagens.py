@@ -16,10 +16,9 @@ with open('Links_imagens.txt', 'w') as f:
     for cod in codigos:
         source = requests.get(url + cod).text
         soup = BeautifulSoup(source, "html.parser")
-        links = soup.find_all('a')
-        for link in links:
-            classe = link.get('class')
-            if classe == ['gallery-mosaic-asset__link'] or classe == ['search-result-asset-link']:
-                f.write('https://www.gettyimages.pt' + link.get('href')+'\n')
+        for link in soup.find_all('link'):
+            if link.get('hreflang') == 'pt-BR':
+                f.write(link.get('href')+'\n')
                 cont+=1
-    f.write(f'\nTotal de links encontrados: {cont}')
+                break
+    f.write(f'\n\nTotal de links encontrados: {cont}')
